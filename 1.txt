@@ -1,0 +1,54 @@
+import pandas as pd
+import numpy as np
+
+data = pd.read_csv('most-popular.csv')
+
+#Head function to display the first five values of the table
+data.head(5)
+
+#Tail function to display the last five values of the table
+data.tail(5)
+
+data.isnull()
+
+data.isnull().sum()
+
+data.notnull()
+
+data.notnull().sum()
+
+#shape function to give the rows x columns value
+data.shape
+
+data.describe()
+
+#Info function to give an overview of the data
+data.info()
+
+#Data Cleaning 
+#Handling missing values by replacing them with Not applicable
+
+data['season_title'] = data['season_title'].fillna('No Season')
+data['season_title']
+
+#Check the sum of the null values once again after handling the missing values
+data.isnull().sum()
+
+data.dtypes
+
+# Data transformation
+# Binning runtime into categories
+bins = [1, 5, 10, 15]
+labels = ['1-5', '6-10', '11-15']
+data['runtime_category'] = pd.cut(data['runtime'], bins=bins, labels=labels, right=False)
+
+# Display the cleaned and transformed dataset
+print("Cleaned and Transformed Dataset:")
+print(data)
+
+# replacing values
+data['category'].replace(['Films (English)', 'Films (Non-English)', 'TV (English)', 'TV (Non-English)'],
+                        [0, 1, 2, 3], inplace=True)
+
+print(data)
+
