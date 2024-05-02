@@ -1,0 +1,66 @@
+import pandas as pd
+import numpy as np
+
+df= pd.read_csv("/content/sample_data/student-por.csv")
+df
+
+df.isnull().sum()
+
+df.boxplot(column=["G1", "G2"])
+
+newdf = df[df["G1"]>5.0]
+newdf
+
+newdf.boxplot("G1")
+
+from scipy.stats import skew
+
+# Calculate skewness before transformation
+original_skewness = skew(df["G1"])
+
+# Apply transformation (e.g., Square Root Transformation)
+transformed_data = np.sqrt(df["G1"])
+
+# Calculate skewness after transformation
+transformed_skewness = skew(transformed_data)
+
+print("Original Skewness:", original_skewness)
+print("Transformed Skewness:", transformed_skewness)
+
+import numpy as np
+import matplotlib.pyplot as plt
+from scipy.stats import boxcox, skew, norm
+import seaborn as sns
+
+# Generating a skewed dataset
+np.random.seed(42)
+skewed_data = np.random.exponential(size=1000)
+
+skewed_data
+
+# Calculate skewness before transformation
+skewness_before = skew(skewed_data)
+
+skewness_before
+
+# Apply Box-Cox transformation
+transformed_data, lambda_value = boxcox(skewed_data + 1)  # Adding 1 to handle zero values if present
+
+# Calculate skewness after transformation
+skewness_after = skew(transformed_data)
+
+skewness_after
+
+# Plotting original and transformed distributions
+plt.figure(figsize=(12, 5))
+
+plt.subplot(1, 2, 1)
+sns.histplot(skewed_data, kde=True)
+plt.title(f'Skewed Distribution (Skewness: {skewness_before:.2f})')
+
+plt.subplot(1, 2, 2)
+sns.histplot(transformed_data, kde=True)
+plt.title(f'Transformed Distribution (Skewness: {skewness_after:.2f})')
+
+plt.tight_layout()
+plt.show()
