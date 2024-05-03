@@ -15,3 +15,10 @@ titanic.loc[:,["survived","alive"]]
 sns.boxplot(x="sex",y="age",data=titanic)
 
 sns.boxplot(x="sex",y="age",data=titanic,hue="survived")
+
+Observations:
+The median age of female passengers who survived appears to be slightly lower than that of male passengers who survived.
+The range of ages for male passengers who survived is wider compared to female passengers who survived.
+There are outliers in the age distribution of both genders, especially among those who did not survive.
+Generally, younger passengers seem to have a higher chance of survival, regardless of gender, as indicated by the lower quartile of the box plots for survivors being generally lower than for non-survivors.
+The median age of male passengers who did not survive is slightly higher than that of female passengers who did not survive.
